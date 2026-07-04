@@ -200,7 +200,7 @@ Included Screens:
 ### 1 Clone Repository
 
 ```bash
-git clone https://github.com/Radha-byte/Employee-Management-System-Flask.git
+git clone https://github.com/Radha-byte/Employee-Management-System.git
 ```
 
 ---
