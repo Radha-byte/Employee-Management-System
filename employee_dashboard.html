@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+        body{
+            background:#f4f6f9;
+        }
+
+        .badge{
+    padding:8px 12px;
+    font-size:13px;
+    border-radius:20px;
+}
+
+        .sidebar{
+            height:100vh;
+            width:250px;
+            position:fixed;
+            background:#1e3c72;
+            padding-top:20px;
+            color:white;
+            overflow-y:auto;
+
+            box-shadow:
+                    4px 0px 20px rgba(0,0,0,0.15);
+        }
+
+        .sidebar h3{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        .sidebar a{
+            display:block;
+            color:white;
+            text-decoration:none;
+            padding:15px 20px;
+            transition:0.3s;
+            border-left:4px solid transparent;
+        }
+
+        .sidebar a:hover{
+            background:#16325c;
+            border-left:4px solid white;
+            padding-left:25px;
+        }
+
+        .content{
+            margin-left:260px;
+            padding:30px;
+        }
+
+        .card-box{
+            background:white;
+            border-radius:15px;
+            padding:20px;
+            box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+            margin-bottom:20px;
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.12),
+                0 5px 10px rgba(0,0,0,0.08);
+            
+            transition:all 0.3s ease;
+        }
+
+        .card-box:hover{
+            transform:
+                translateY(-5px);
+                scale(1.02);
+
+            box-shadow:
+                0 18px 35px rgba(0,0,0,0.18),
+                  0 10px 15px rgba(0,0,0,0.12);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+        <h3>Employee Panel</h3>
+
+        <a href="#">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+
+        <a href="/my_profile">
+            <i class="bi bi-person"></i> My Profile
+        </a>
+
+        <a href="/my_tasks">
+    <i class="bi bi-list-check"></i> My Tasks
+</a>
+
+        <a href="/my_department">
+    <i class="bi bi-building"></i> My Department
+</a>
+
+<a href="/apply_leave">
+    <i class="bi bi-calendar-x"></i> Apply Leave
+</a>
+
+<a href="/my_leaves">
+    <i class="bi bi-calendar-check"></i> My Leaves
+</a>
+
+        <a href="#" onclick="confirmLogout()">
+    <i class="bi bi-box-arrow-right"></i> Logout
+</a>
+
+    </div>
+
+    <div class="content">
+
+        <div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-body d-flex justify-content-between align-items-center">
+
+        <div>
+
+            <h2>
+                {{ greeting }},
+                {{ username }}
+            </h2>
+
+            <p class="text-muted">
+                Employee Dashboard Panel
+            </p>
+
+        </div>
+
+        {% if employee.profile_photo %}
+
+        <img src="{{ url_for('static', filename='uploads/' ~ employee.profile_photo) }}"
+             style="
+                width:90px;
+                height:90px;
+                border-radius:50%;
+                object-fit:cover;
+                border:4px solid #1e3c72;
+             ">
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<div class="mb-4">
+
+    <a href="/my_tasks"
+       class="btn btn-outline-primary me-2">
+
+       <i class="bi bi-list-check"></i>
+       My Tasks
+
+    </a>
+
+    <a href="/my_profile"
+       class="btn btn-outline-success me-2">
+
+       <i class="bi bi-person"></i>
+       My Profile
+
+    </a>
+
+</div>
+
+        <div class="row">
+
+    <div class="col-md-3">
+
+        <div class="card-box bg-primary text-white">
+
+            <h5>
+    <i class="bi bi-list-check"></i>
+    Total Assigned Tasks
+</h5>
+
+            <h2>{{ total_tasks }}</h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card-box bg-success text-white">
+
+            <h5>
+    <i class="bi bi-check-circle-fill"></i>
+    Completed Tasks
+</h5>
+
+            <h2>{{ completed }}</h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card-box bg-warning text-white">
+
+            <h5>
+    <i class="bi bi-clock-fill"></i>
+    Pending Tasks
+</h5>
+
+            <h2>{{ pending }}</h2>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card-box bg-danger text-white">
+
+            <h5>
+    <i class="bi bi-calendar-event"></i>
+    Upcoming Deadlines
+</h5>
+
+            <h2>{{ pending }}</h2>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mt-4">
+
+    <div class="col-md-8">
+
+        <div class="card-box">
+
+            <h4>Task Summary</h4>
+
+            <div style="height:250px;">
+    <canvas id="taskChart"></canvas>
+</div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card-box">
+
+            <h4>
+                <i class="bi bi-calendar-event"></i>
+                Deadline Details
+            </h4>
+
+            {% for task in tasks %}
+
+<div class="alert alert-warning mb-3">
+
+    <i class="bi bi-calendar-event"></i>
+
+    <strong>
+        {{ task.task_title }}
+    </strong>
+
+    <br>
+
+    Due Date:
+    {{ task.due_date }}
+
+</div>
+
+{% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+        <div class="row mt-3">
+
+    <div class="col-md-8">
+
+        <div class="card-box">
+
+            <h4>My Assigned Tasks</h4>
+
+            <table class="table table-bordered mt-3">
+
+                <thead>
+
+                    <tr>
+                        <th>Task</th>
+                        <th>Assigned</th>
+                        <th>Due Date</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for task in tasks %}
+
+                    <tr>
+
+                        <td>{{ task.task_title }}</td>
+                        <td>{{ task.assigned_date }}</td>
+                        <td>{{ task.due_date }}</td>
+
+                        <td>
+
+{% if task.priority == 'High' %}
+
+<span class="badge bg-danger">
+    High
+</span>
+
+{% elif task.priority == 'Medium' %}
+
+<span class="badge bg-warning text-dark">
+    Medium
+</span>
+
+{% else %}
+
+<span class="badge bg-success">
+    Low
+</span>
+
+{% endif %}
+
+</td>
+
+                        <td>
+
+                        {% if task.status == 'Completed' %}
+
+                        <span class="badge bg-success">
+                            Completed
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge bg-warning text-dark">
+                            Pending
+                        </span>
+
+                    {% endif %}
+
+                    </td>
+
+<td>
+
+{% if task.status == 'Pending' %}
+
+<a href="/update_task_status/{{ task.id }}"
+   class="btn btn-success btn-sm">
+
+   Mark Complete
+
+</a>
+
+{% else %}
+
+<span class="badge bg-success">
+    Completed
+</span>
+
+{% endif %}
+
+</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-8">
+
+        <div class="card-box mt-4">
+
+    <h4>
+        <i class="bi bi-person-circle"></i>
+        My Information
+    </h4>
+
+    <hr>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+            <i class="bi bi-person-fill"></i>
+
+            <strong>Username:</strong>
+
+            <br>
+
+            {{ username }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <i class="bi bi-credit-card"></i>
+
+            <strong>Employee ID:</strong>
+
+            <br>
+
+            {{ employee.employee_id }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <i class="bi bi-person-badge"></i>
+
+            <strong>Name:</strong>
+
+            <br>
+
+            {{ employee.name }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <i class="bi bi-building"></i>
+
+            <strong>Department:</strong>
+
+            <br>
+
+            {{ employee.department }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <i class="bi bi-briefcase-fill"></i>
+
+            <strong>Designation:</strong>
+
+            <br>
+
+            {{ employee.designation }}
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+            <i class="bi bi-geo-alt-fill"></i>
+
+            <strong>Office Location:</strong>
+
+            <br>
+
+            {{ employee.office_location }}
+
+        </div>
+
+    </div>
+
+</div>
+
+    
+<script>
+
+const taskChart = document.getElementById('taskChart');
+
+new Chart(taskChart, {
+
+    type: 'pie',
+
+    data: {
+
+        labels: [
+            'Completed',
+            'Pending'
+        ],
+
+        datasets: [{
+
+            data: [
+                {{ completed }},
+                {{ pending }}
+            ],
+
+            backgroundColor: [
+                '#198754',
+                '#ffc107'
+            ]
+
+        }]
+
+    },
+
+    options:{
+        responsive:true,
+        maintainAspectRatio:false
+    }
+
+});
+
+</script>
+
+<script>
+
+function confirmLogout() {
+
+    let result = confirm(
+        "Are you sure you want to logout?"
+    );
+
+    if(result) {
+
+        window.location.href = "/logout";
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>
