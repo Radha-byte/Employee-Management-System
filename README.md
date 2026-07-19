@@ -1,6 +1,6 @@
 # 👨‍💼 Employee Management System
 
-> A full-stack **Employee Management System** developed using **Python Flask** and **MySQL** during my internship at **Bihar State Power Transmission Company Limited (BSPTCL)**. The system streamlines employee management, task allocation, leave management, and profile management through dedicated **Admin** and **Employee** portals.
+> A full-stack **Employee Management System** developed using **Python Flask** and **MySQL** during my internship. The system streamlines employee management, task allocation, leave management, and profile management through dedicated **Admin** and **Employee** portals.
 
 ---
 
@@ -342,10 +342,6 @@ Through this internship project, I gained practical experience in:
 ---
 
 # 🏢 Internship
-
-**Organization**
-
-Bihar State Power Transmission Company Limited (BSPTCL)
 
 **Internship Domain**
 
