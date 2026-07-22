@@ -5,7 +5,8 @@ __pycache__/
 
 config.py
 
-static/uploads/
+static/uploads/*
+!static/uploads/.gitkeep
 
 .vscode/
 .idea/
