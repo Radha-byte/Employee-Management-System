@@ -283,6 +283,20 @@ python app.py
 
 ---
 
+## Demo Login Credentials
+
+### Admin
+
+Username: admin
+
+Password: admin123
+
+### Employee
+
+Username: employee1
+
+Password: emp123
+
 # 👨‍💻 User Roles
 
 ## Admin
