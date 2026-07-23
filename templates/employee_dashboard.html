@@ -500,6 +500,9 @@
     
 <script>
 
+const completedTasks = Number("{{ completed }}");
+const pendingTasks = Number("{{ pending }}");
+
 const taskChart = document.getElementById('taskChart');
 
 new Chart(taskChart, {
@@ -516,8 +519,8 @@ new Chart(taskChart, {
         datasets: [{
 
             data: [
-                completed,
-                pending
+                completedTasks,
+                pendingTasks
             ],
 
             backgroundColor: [
