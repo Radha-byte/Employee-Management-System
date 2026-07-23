@@ -1,12 +1,42 @@
+# Virtual Environment
 venv/
+env/
+.venv/
 
+# Python Cache
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 
+# Environment / Secrets
 config.py
+.env
+.env.*
 
+# IDE
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Uploaded Images
 static/uploads/*
 !static/uploads/.gitkeep
 
-.vscode/
-.idea/
+# Logs
+*.log
+
+# SQLite (if ever used)
+*.db
+*.sqlite3
+
+# Testing / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build
+build/
+dist/

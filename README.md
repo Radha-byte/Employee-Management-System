@@ -1,22 +1,12 @@
 # 👨‍💼 Employee Management System
 
-![Python](https://img.shields.io/badge/Python-3.12-blue)
-![Flask](https://img.shields.io/badge/Flask-Framework-black)
-![MySQL](https://img.shields.io/badge/MySQL-Database-orange)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-5-purple)
-![Render](https://img.shields.io/badge/Deployed%20on-Render-success)
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-Framework-3BABC3?logo=flask&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?logo=mysql&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white)
+![Render](https://img.shields.io/badge/Deploy-Render-46E3B7?logo=render&logoColor=black)
 
 > A full-stack **Employee Management System** developed using **Python Flask** and **MySQL** during my internship. The system streamlines employee management, task allocation, leave management, and profile management through dedicated **Admin** and **Employee** portals.
-
----
-
-## 📌 Project Overview
-
-The Employee Management System (EMS) is a web-based application designed to simplify and digitize day-to-day employee management activities within an organization.
-
-The application provides separate dashboards for **Administrators** and **Employees**, enabling efficient management of employee records, departments, task assignments, leave requests, and profile information.
-
-The project focuses on improving organizational workflow while reducing manual record-keeping and administrative effort.
 
 ---
 
@@ -35,9 +25,21 @@ https://employee-management-system-frg0.onrender.com/
 >
 > **Employee**
 > - Username: employee1
-> - Password: employee123
+> - Password: emp123
 
 ---
+
+## 📌 Project Overview
+
+The Employee Management System (EMS) is a web-based application designed to simplify and digitize day-to-day employee management activities within an organization.
+
+The application provides separate dashboards for **Administrators** and **Employees**, enabling efficient management of employee records, departments, task assignments, leave requests, and profile information.
+
+The project focuses on improving organizational workflow while reducing manual record-keeping and administrative effort.
+
+---
+
+
 
 # ✨ Key Features
 
