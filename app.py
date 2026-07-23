@@ -998,7 +998,6 @@ def my_leaves():
     """, (session['username'],))
 
     leaves = cur.fetchall()
-    print(leaves)
 
     cur.close()
 
