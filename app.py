@@ -15,6 +15,8 @@ app.secret_key = os.getenv("SECRET_KEY", "secretkey")
 
 # MySQL Configuration
 
+# MySQL Configuration
+
 app.config["MYSQL_HOST"] = os.getenv("MYSQL_HOST")
 app.config["MYSQL_PORT"] = int(os.getenv("MYSQL_PORT", 3306))
 app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")
@@ -74,35 +76,35 @@ def admin_dashboard():
         cur = mysql.connection.cursor()
 
         # TOTAL EMPLOYEES
-        cur.execute("SELECT COUNT(*) FROM employees")
-        total_employees = cur.fetchone()[0]
+        cur.execute("SELECT COUNT(*) AS total FROM employees")
+        total_employees = cur.fetchone()["total"]
 
         # TOTAL DEPARTMENTS
-        cur.execute("SELECT COUNT(*) FROM departments")
-        total_departments = cur.fetchone()[0]
+        cur.execute("SELECT COUNT(*) AS total FROM departments")
+        total_departments = cur.fetchone()["total"]
 
         # COMPLETED TASKS
         cur.execute(
-            "SELECT COUNT(*) FROM tasks WHERE status='Completed'"
+            "SELECT COUNT(*) AS total FROM tasks WHERE status='Completed'"
         )
-        completed_tasks = cur.fetchone()[0]
+        completed_tasks = cur.fetchone()["total"]
 
         # PENDING TASKS
         cur.execute(
-            "SELECT COUNT(*) FROM tasks WHERE status='Pending'"
+            "SELECT COUNT(*) AS total FROM tasks WHERE status='Pending'"
         )
-        pending_tasks = cur.fetchone()[0]
+        pending_tasks = cur.fetchone()["total"]
         
         # OVERDUE TASKS
 
         cur.execute("""
-        SELECT COUNT(*)
+        SELECT COUNT(*) AS total
         FROM tasks
         WHERE due_date < CURDATE()
         AND status='Pending'
         """)
 
-        overdue_tasks = cur.fetchone()[0]
+        overdue_tasks = cur.fetchone()["total"]
 
         # TASK COMPLETION RATE
         total_tasks = completed_tasks + pending_tasks
@@ -243,7 +245,7 @@ def view_employees():
             cur.execute(query)
 
         employees = cur.fetchall()
-        print(employees)
+        # print(employees)
 
         cur.close()
 
@@ -419,9 +421,9 @@ WHERE employee_id=%s
 
             cur.close()
 
-            employee_id = employee[0]
-            username = employee[1]
-            employee_name = employee[2]
+            employee_id = employee["employee_id"]
+            username = employee["username"]
+            employee_name = employee["name"]
             task_title = request.form['task_title']
             description = request.form['description']
             assigned_date = request.form['assigned_date']
@@ -514,7 +516,7 @@ def view_tasks():
 
     cur.close()
 
-    print(tasks[0])
+    # print(tasks[0])
 
     return render_template(
         'view_tasks.html',
@@ -719,7 +721,7 @@ def employee_dashboard():
         else:
          greeting = "Good Evening 🌙"
 
-         print(employee)
+         # print(employee)
 
         return render_template(
             'employee_dashboard.html',
@@ -774,7 +776,7 @@ def my_profile():
 
         employee = cur.fetchone()
 
-        print("Employee Data:", employee)
+        # print("Employee Data:", employee)
 
         cur.close()
 

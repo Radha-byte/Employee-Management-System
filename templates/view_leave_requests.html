@@ -44,22 +44,22 @@
 
 <tr>
 
-<td>{{ leave[0] }}</td>
-<td>{{ leave[1] }}</td>
-<td>{{ leave[2] }}</td>
-<td>{{ leave[3] }}</td>
-<td>{{ leave[4] }}</td>
-<td>{{ leave[5] }}</td>
+<td>{{ leave.id }}</td>
+<td>{{ leave.username }}</td>
+<td>{{ leave.leave_type }}</td>
+<td>{{ leave.start_date }}</td>
+<td>{{ leave.end_date }}</td>
+<td>{{ leave.reason }}</td>
 
 <td>
 
-{% if leave[6] == 'Approved' %}
+{% if leave.status == 'Approved' %}
 
 <span class="badge bg-success">
 Approved
 </span>
 
-{% elif leave[6] == 'Rejected' %}
+{% elif leave.status == 'Rejected' %}
 
 <span class="badge bg-danger">
 Rejected
@@ -77,14 +77,14 @@ Pending
 
 <td>
 
-<a href="/approve_leave/{{ leave[0] }}"
+<a href="/approve_leave/{{ leave.id }}"
    class="btn btn-success btn-sm">
 
 Approve
 
 </a>
 
-<a href="/reject_leave/{{ leave[0] }}"
+<a href="/reject_leave/{{ leave.id }}"
    class="btn btn-danger btn-sm">
 
 Reject

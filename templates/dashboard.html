@@ -417,10 +417,9 @@
             ],
 
             datasets: [{
-
                 data: [
-                    {{ completed_tasks }},
-                    {{ pending_tasks }}
+                    completedTasks,
+                    pendingTasks
                 ],
 
                 backgroundColor: [
@@ -433,9 +432,9 @@
         },
 
         options: {
-    responsive: true,
-    maintainAspectRatio: false
-}
+            responsive: true,
+            maintainAspectRatio: false
+        }
 
     });
 
@@ -460,9 +459,9 @@
                 label: 'Organization Data',
 
                 data: [
-                    {{ total_employees }},
-                    {{ total_departments }}
-                ],
+                    total_employees,
+                    total_departments
+                    ],
 
                 backgroundColor: [
                     '#0d6efd',
@@ -540,10 +539,10 @@
 
     <td>
 
-        {% if employee[3] %}
+        {% if employee.profile_photo %}
 
         <img src="{{ url_for('static',
-        filename='uploads/' + employee[3]) }}"
+        filename='uploads/' + employee.profile_photo) }}"
         width="45"
         height="45"
         style="border-radius:50%; object-fit:cover;">
@@ -556,9 +555,9 @@
 
     </td>
 
-    <td>{{ employee[0] }}</td>
-    <td>{{ employee[1] }}</td>
-    <td>{{ employee[2] }}</td>
+    <td>{{ employee.employee_id }}</td>
+    <td>{{ employee.name }}</td>
+    <td>{{ employee.department }}</td>
 
 </tr>
 
@@ -591,14 +590,13 @@
 
             <tr>
 
-                <td>{{ task[0] }}</td>
-                <td>{{ task[1] }}</td>
-                <td>{{ task[2] }}</td>
+                <td>{{ task.employee_id }}</td>
+                <td>{{ task.employee_name }}</td>
+                <td>{{ task.task_title }}</td>
 
                 <td>
 
-                    {% if task[3] == 'Completed' %}
-
+                    {% if task.status == 'Completed' %}
                     <span class="badge bg-success">
                         Completed
                     </span>

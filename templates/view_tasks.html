@@ -105,23 +105,23 @@
 
                 <tr>
 
-                    <td>{{ task[0] }}</td>
-                    <td>{{ task[8] }} | {{ task[1] }}</td>
-                    <td>{{ task[2] }}</td>
-                    <td>{{ task[3] }}</td>
-                    <td>{{ task[4] }}</td>
-                    <td>{{ task[5] }}</td>
-                    <td>{{ task[6] }}</td>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.employee_name }} | {{ task[1] }}</td>
+                    <td>{{ task.task_title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.assigned_date }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.status }}</td>
 
                     <td>
 
-{% if task[7] == 'High' %}
+{% if task.priority == 'High' %}
 
 <span class="badge bg-danger">
     High
 </span>
 
-{% elif task[7] == 'Medium' %}
+{% elif task.priority == 'Medium' %}
 
 <span class="badge bg-warning text-dark">
     Medium
@@ -139,14 +139,14 @@
 
                     <td>
 
-                        <a href="/edit_task/{{ task[0] }}"
+                        <a href="/edit_task/{{ task.id }}"
                             class="btn btn-warning btn-sm">
 
                             Edit
 
                         </a>
 
-                        <a href="/delete_task/{{ task[0] }}"
+                        <a href="/delete_task/{{ task.id }}"
                             class="btn btn-danger btn-sm"
                             onclick="return confirm('Delete this task?')">
 
