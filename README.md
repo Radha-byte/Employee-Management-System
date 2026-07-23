@@ -1,5 +1,11 @@
 # 👨‍💼 Employee Management System
 
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Flask](https://img.shields.io/badge/Flask-Framework-black)
+![MySQL](https://img.shields.io/badge/MySQL-Database-orange)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-purple)
+![Render](https://img.shields.io/badge/Deployed%20on-Render-success)
+
 > A full-stack **Employee Management System** developed using **Python Flask** and **MySQL** during my internship. The system streamlines employee management, task allocation, leave management, and profile management through dedicated **Admin** and **Employee** portals.
 
 ---
@@ -11,6 +17,25 @@ The Employee Management System (EMS) is a web-based application designed to simp
 The application provides separate dashboards for **Administrators** and **Employees**, enabling efficient management of employee records, departments, task assignments, leave requests, and profile information.
 
 The project focuses on improving organizational workflow while reducing manual record-keeping and administrative effort.
+
+---
+
+## 🌐 Live Demo
+
+The Employee Management System is successfully deployed and can be accessed online.
+
+🔗 **Live Application:**  
+https://employee-management-system-frg0.onrender.com/
+
+> **Demo Credentials**
+>
+> **Admin**
+> - Username: admin
+> - Password: admin123
+>
+> **Employee**
+> - Username: employee1
+> - Password: employee123
 
 ---
 
@@ -283,19 +308,6 @@ python app.py
 
 ---
 
-## Demo Login Credentials
-
-### Admin
-
-Username: admin
-
-Password: admin123
-
-### Employee
-
-Username: employee1
-
-Password: emp123
 
 # 👨‍💻 User Roles
 
